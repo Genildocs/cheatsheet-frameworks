@@ -3,309 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
     <title>Cheat Sheet - Frameworks Frontend v2.0</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        background: linear-gradient(
-          135deg,
-          #0c0c0c 0%,
-          #1a0b2e 50%,
-          #16213e 100%
-        );
-        font-family: 'Arial', sans-serif;
-        color: white;
-        overflow-x: auto;
-        min-height: 100vh;
-      }
-
-      .container {
-        padding: 2rem;
-        max-width: 1400px;
-        margin: 0 auto;
-      }
-
-      .header {
-        text-align: center;
-        margin-bottom: 3rem;
-      }
-
-      .main-title {
-        font-size: 4rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        letter-spacing: 8px;
-        color: #ff1b8d;
-        text-shadow: 0 0 10px #ff1b8d, 0 0 20px #ff1b8d, 0 0 40px #ff1b8d,
-          0 0 80px #ff1b8d;
-        margin-bottom: 1rem;
-        animation: pulse 2s infinite;
-      }
-
-      .subtitle {
-        font-size: 1.5rem;
-        color: #00d4ff;
-        text-shadow: 0 0 10px #00d4ff;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-      }
-
-      .version-badge {
-        display: inline-block;
-        margin-top: 1rem;
-        padding: 0.5rem 1.5rem;
-        background: rgba(255, 27, 141, 0.2);
-        border: 2px solid #ff1b8d;
-        border-radius: 20px;
-        color: #ff1b8d;
-        font-weight: bold;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        font-size: 0.9rem;
-      }
-
-      .frameworks-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-        gap: 2rem;
-        margin-top: 2rem;
-      }
-
-      .framework-card {
-        background: rgba(20, 20, 20, 0.8);
-        border-radius: 15px;
-        padding: 2rem;
-        border: 2px solid transparent;
-        position: relative;
-        overflow: hidden;
-        transition: all 0.3s ease;
-      }
-
-      .framework-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        border-radius: 15px;
-        padding: 2px;
-        background: linear-gradient(
-          45deg,
-          transparent,
-          var(--glow-color),
-          transparent
-        );
-        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        mask-composite: exclude;
-        -webkit-mask-composite: xor;
-      }
-
-      .framework-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      }
-
-      .react { --glow-color: #61dafb; }
-      .angular { --glow-color: #dd0031; }
-      .vue { --glow-color: #4fc08d; }
-      .svelte { --glow-color: #ff3e00; }
-      .nextjs { --glow-color: #ffffff; }
-      .nuxt { --glow-color: #00c58e; }
-      .astro { --glow-color: #FF5D01; }
-      .solid { --glow-color: #2C4F7C; }
-      .alpine { --glow-color: #8BC0D0; }
-      .lit { --glow-color: #324FFF; }
-      .qwik { --glow-color: #AC7EF4; }
-
-      .framework-header {
-        display: flex;
-        align-items: center;
-        margin-bottom: 1.5rem;
-      }
-
-      .framework-icon {
-        width: 60px;
-        height: 60px;
-        margin-right: 1rem;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2rem;
-        font-weight: bold;
-        text-shadow: 0 0 10px currentColor;
-      }
-
-      .react .framework-icon { background: #61dafb; color: #003d4f; }
-      .angular .framework-icon { background: #dd0031; color: #ffffff; }
-      .vue .framework-icon { background: #4fc08d; color: #ffffff; }
-      .svelte .framework-icon { background: #ff3e00; color: #ffffff; }
-      .nextjs .framework-icon { background: #ffffff; color: #000000; }
-      .nuxt .framework-icon { background: #00c58e; color: #003d4f; }
-      .astro .framework-icon { background: #FF5D01; color: #ffffff; }
-      .solid .framework-icon { background: #2C4F7C; color: #ffffff; }
-      .alpine .framework-icon { background: #8BC0D0; color: #003d4f; }
-      .lit .framework-icon { background: #324FFF; color: #ffffff; }
-      .qwik .framework-icon { background: #AC7EF4; color: #ffffff; }
-
-      .framework-name {
-        font-size: 2.5rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        text-shadow: 0 0 15px currentColor;
-      }
-
-      .react .framework-name { color: #61dafb; }
-      .angular .framework-name { color: #dd0031; }
-      .vue .framework-name { color: #4fc08d; }
-      .svelte .framework-name { color: #ff3e00; }
-      .nextjs .framework-name { color: #ffffff; }
-      .nuxt .framework-name { color: #00c58e; }
-      .astro .framework-name { color: #FF5D01; }
-      .solid .framework-name { color: #2C4F7C; }
-      .alpine .framework-name { color: #8BC0D0; }
-      .lit .framework-name { color: #324FFF; }
-      .qwik .framework-name { color: #AC7EF4; }
-
-      .framework-description {
-        color: #cccccc;
-        font-size: 1rem;
-        margin-bottom: 1.5rem;
-        line-height: 1.5;
-      }
-
-      .features-section {
-        margin-bottom: 1.5rem;
-      }
-
-      .section-title {
-        font-size: 1.2rem;
-        color: #ffffff;
-        margin-bottom: 0.8rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-weight: bold;
-      }
-
-      .features-list,
-      .performance-list,
-      .use-cases-list {
-        list-style: none;
-      }
-
-      .features-list li,
-      .performance-list li,
-      .use-cases-list li {
-        padding: 0.3rem 0;
-        color: #b0b0b0;
-        position: relative;
-        padding-left: 1.5rem;
-      }
-
-      .features-list li::before,
-      .performance-list li::before,
-      .use-cases-list li::before {
-        content: '▶';
-        position: absolute;
-        left: 0;
-        color: var(--glow-color);
-        text-shadow: 0 0 5px currentColor;
-      }
-
-      .performance-stats {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem;
-        margin-top: 1rem;
-      }
-
-      .stat {
-        background: rgba(40, 40, 40, 0.6);
-        padding: 0.8rem;
-        border-radius: 8px;
-        text-align: center;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      .stat-label {
-        font-size: 0.9rem;
-        color: #888;
-        text-transform: uppercase;
-      }
-
-      .stat-value {
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: var(--glow-color);
-        text-shadow: 0 0 5px currentColor;
-      }
-
-      @keyframes pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.8; }
-      }
-
-      .difficulty-meter {
-        display: flex;
-        align-items: center;
-        margin-top: 1rem;
-      }
-
-      .difficulty-label {
-        margin-right: 1rem;
-        font-size: 0.9rem;
-        color: #888;
-      }
-
-      .difficulty-bar {
-        display: flex;
-        gap: 3px;
-      }
-
-      .difficulty-dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.2);
-      }
-
-      .difficulty-dot.active {
-        background: var(--glow-color);
-        box-shadow: 0 0 5px currentColor;
-      }
-
-      @media (max-width: 768px) {
-        .main-title {
-          font-size: 2.5rem;
-          letter-spacing: 4px;
-        }
-
-        .frameworks-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .framework-card {
-          padding: 1.5rem;
-        }
-
-        .performance-stats {
-          grid-template-columns: 1fr;
-        }
-      }
-    </style>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.0/dist/cdn.min.js"></script>
   </head>
   <body>
     <div class="container">
       <div class="header">
-        <h1 class="main-title">CHEAT SHEET</h1>
+        <h1
+          class="main-title"
+          x-data="{message: 'CHEAT SHEET'}"
+          x-text="message"></h1>
         <p class="subtitle">Frameworks Frontend - Guia de Escolha</p>
-        <div class="version-badge">VERSION 2.0 - 11 FRAMEWORKS</div>
+        <div class="version-badge" x-data="{version: '<strong>2.0</strong>'}">
+          VERSION <span x-html="version"></span> - 11 FRAMEWORKS
+        </div>
       </div>
 
       <div class="frameworks-grid">
@@ -315,12 +29,15 @@
             <div class="framework-icon">⚛️</div>
             <div>
               <h2 class="framework-name">React</h2>
-              <p style="color: #61dafb; font-weight: bold">Flexível & Popular</p>
+              <p style="color: #61dafb; font-weight: bold">
+                Flexível & Popular
+              </p>
             </div>
           </div>
 
           <p class="framework-description">
-            Biblioteca JavaScript para criar interfaces de usuário. Componentizada, com virtual DOM e ecossistema gigante.
+            Biblioteca JavaScript para criar interfaces de usuário.
+            Componentizada, com virtual DOM e ecossistema gigante.
           </p>
 
           <div class="features-section">
@@ -375,12 +92,15 @@
             <div class="framework-icon">🅰️</div>
             <div>
               <h2 class="framework-name">Angular</h2>
-              <p style="color: #dd0031; font-weight: bold">Enterprise & Robusto</p>
+              <p style="color: #dd0031; font-weight: bold">
+                Enterprise & Robusto
+              </p>
             </div>
           </div>
 
           <p class="framework-description">
-            Framework completo da Google com TypeScript nativo. Arquitetura opinionada e ferramentas enterprise.
+            Framework completo da Google com TypeScript nativo. Arquitetura
+            opinionada e ferramentas enterprise.
           </p>
 
           <div class="features-section">
@@ -435,12 +155,15 @@
             <div class="framework-icon">💚</div>
             <div>
               <h2 class="framework-name">Vue.js</h2>
-              <p style="color: #4fc08d; font-weight: bold">Progressivo & Simples</p>
+              <p style="color: #4fc08d; font-weight: bold">
+                Progressivo & Simples
+              </p>
             </div>
           </div>
 
           <p class="framework-description">
-            Framework progressivo que pode ser adotado incrementalmente. Combina o melhor do React e Angular com simplicidade.
+            Framework progressivo que pode ser adotado incrementalmente. Combina
+            o melhor do React e Angular com simplicidade.
           </p>
 
           <div class="features-section">
@@ -495,12 +218,15 @@
             <div class="framework-icon">🧡</div>
             <div>
               <h2 class="framework-name">Svelte</h2>
-              <p style="color: #ff3e00; font-weight: bold">Compilado & Rápido</p>
+              <p style="color: #ff3e00; font-weight: bold">
+                Compilado & Rápido
+              </p>
             </div>
           </div>
 
           <p class="framework-description">
-            Compilador que gera JavaScript vanilla otimizado. Zero runtime overhead e bundle sizes extremamente pequenos.
+            Compilador que gera JavaScript vanilla otimizado. Zero runtime
+            overhead e bundle sizes extremamente pequenos.
           </p>
 
           <div class="features-section">
@@ -560,7 +286,8 @@
           </div>
 
           <p class="framework-description">
-            Meta-framework React com SSR/SSG out-of-the-box. Ideal para sites que precisam de SEO e performance.
+            Meta-framework React com SSR/SSG out-of-the-box. Ideal para sites
+            que precisam de SEO e performance.
           </p>
 
           <div class="features-section">
@@ -615,12 +342,15 @@
             <div class="framework-icon">💚</div>
             <div>
               <h2 class="framework-name">Nuxt.js</h2>
-              <p style="color: #00c58e; font-weight: bold">Vue Meta-Framework</p>
+              <p style="color: #00c58e; font-weight: bold">
+                Vue Meta-Framework
+              </p>
             </div>
           </div>
 
           <p class="framework-description">
-            Meta-framework Vue.js com SSR/SSG e convenções inteligentes. O "Next.js do ecossistema Vue".
+            Meta-framework Vue.js com SSR/SSG e convenções inteligentes. O
+            "Next.js do ecossistema Vue".
           </p>
 
           <div class="features-section">
@@ -675,12 +405,15 @@
             <div class="framework-icon">🚀</div>
             <div>
               <h2 class="framework-name">Astro</h2>
-              <p style="color: #FF5D01; font-weight: bold">Content-First & MPA</p>
+              <p style="color: #ff5d01; font-weight: bold">
+                Content-First & MPA
+              </p>
             </div>
           </div>
 
           <p class="framework-description">
-            Framework content-first que envia zero JavaScript por padrão. Perfeito para sites estáticos com ilhas de interatividade.
+            Framework content-first que envia zero JavaScript por padrão.
+            Perfeito para sites estáticos com ilhas de interatividade.
           </p>
 
           <div class="features-section">
@@ -735,12 +468,15 @@
             <div class="framework-icon">💎</div>
             <div>
               <h2 class="framework-name">SolidJS</h2>
-              <p style="color: #2C4F7C; font-weight: bold">Reativo & Performático</p>
+              <p style="color: #2c4f7c; font-weight: bold">
+                Reativo & Performático
+              </p>
             </div>
           </div>
 
           <p class="framework-description">
-            Framework reativo com JSX que compila para JavaScript vanilla otimizado. Performance superior ao React sem Virtual DOM.
+            Framework reativo com JSX que compila para JavaScript vanilla
+            otimizado. Performance superior ao React sem Virtual DOM.
           </p>
 
           <div class="features-section">
@@ -795,12 +531,15 @@
             <div class="framework-icon">⛰️</div>
             <div>
               <h2 class="framework-name">Alpine.js</h2>
-              <p style="color: #8BC0D0; font-weight: bold">Minimalista & Progressivo</p>
+              <p style="color: #8bc0d0; font-weight: bold">
+                Minimalista & Progressivo
+              </p>
             </div>
           </div>
 
           <p class="framework-description">
-            Framework JavaScript leve para adicionar comportamento ao HTML. Pensado como "Tailwind para JavaScript".
+            Framework JavaScript leve para adicionar comportamento ao HTML.
+            Pensado como "Tailwind para JavaScript".
           </p>
 
           <div class="features-section">
@@ -855,12 +594,15 @@
             <div class="framework-icon">🔥</div>
             <div>
               <h2 class="framework-name">Lit</h2>
-              <p style="color: #324FFF; font-weight: bold">Web Components Nativos</p>
+              <p style="color: #324fff; font-weight: bold">
+                Web Components Nativos
+              </p>
             </div>
           </div>
 
           <p class="framework-description">
-            Biblioteca para criar Web Components rápidos e leves usando padrões modernos da web. Framework-agnostic por natureza.
+            Biblioteca para criar Web Components rápidos e leves usando padrões
+            modernos da web. Framework-agnostic por natureza.
           </p>
 
           <div class="features-section">
@@ -915,12 +657,15 @@
             <div class="framework-icon">⚡</div>
             <div>
               <h2 class="framework-name">Qwik</h2>
-              <p style="color: #AC7EF4; font-weight: bold">Resumability & Zero Hydration</p>
+              <p style="color: #ac7ef4; font-weight: bold">
+                Resumability & Zero Hydration
+              </p>
             </div>
           </div>
 
           <p class="framework-description">
-            Framework revolucionário com resumability: não faz hydration, continua execução no cliente de onde o servidor parou.
+            Framework revolucionário com resumability: não faz hydration,
+            continua execução no cliente de onde o servidor parou.
           </p>
 
           <div class="features-section">
@@ -968,6 +713,17 @@
             </div>
           </div>
         </div>
+      </div>
+      <div
+        x-data="{message:'Feito com ❤️ pela equipe do: '}"
+        :style="{display:'flex', justifyContent:'center',marginTop: '20px'}">
+        <span x-text="message"></span>
+        <a
+          href="https://blueprintblog.tech"
+          target="_blank"
+          :style="{display:'inline-flex',alignItems:'center',textDecoration:'underline', color:'white', marginLeft:'5px'}"
+          >BLUEPRINTBLOG</a
+        >
       </div>
     </div>
   </body>
