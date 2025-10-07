@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cheat Sheet - Frameworks Frontend v2.0</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: linear-gradient(
+          135deg,
+          #0c0c0c 0%,
+          #1a0b2e 50%,
+          #16213e 100%
+        );
+        font-family: 'Arial', sans-serif;
+        color: white;
+        overflow-x: auto;
+        min-height: 100vh;
+      }
+
+      .container {
+        padding: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .main-title {
+        font-size: 4rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 8px;
+        color: #ff1b8d;
+        text-shadow: 0 0 10px #ff1b8d, 0 0 20px #ff1b8d, 0 0 40px #ff1b8d,
+          0 0 80px #ff1b8d;
+        margin-bottom: 1rem;
+        animation: pulse 2s infinite;
+      }
+
+      .subtitle {
+        font-size: 1.5rem;
+        color: #00d4ff;
+        text-shadow: 0 0 10px #00d4ff;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+      }
+
+      .version-badge {
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.5rem 1.5rem;
+        background: rgba(255, 27, 141, 0.2);
+        border: 2px solid #ff1b8d;
+        border-radius: 20px;
+        color: #ff1b8d;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 0.9rem;
+      }
+
+      .frameworks-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .framework-card {
+        background: rgba(20, 20, 20, 0.8);
+        border-radius: 15px;
+        padding: 2rem;
+        border: 2px solid transparent;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .framework-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: 15px;
+        padding: 2px;
+        background: linear-gradient(
+          45deg,
+          transparent,
+          var(--glow-color),
+          transparent
+        );
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        -webkit-mask-composite: xor;
+      }
+
+      .framework-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      .react { --glow-color: #61dafb; }
+      .angular { --glow-color: #dd0031; }
+      .vue { --glow-color: #4fc08d; }
+      .svelte { --glow-color: #ff3e00; }
+      .nextjs { --glow-color: #ffffff; }
+      .nuxt { --glow-color: #00c58e; }
+      .astro { --glow-color: #FF5D01; }
+      .solid { --glow-color: #2C4F7C; }
+      .alpine { --glow-color: #8BC0D0; }
+      .lit { --glow-color: #324FFF; }
+      .qwik { --glow-color: #AC7EF4; }
+
+      .framework-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .framework-icon {
+        width: 60px;
+        height: 60px;
+        margin-right: 1rem;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        font-weight: bold;
+        text-shadow: 0 0 10px currentColor;
+      }
+
+      .react .framework-icon { background: #61dafb; color: #003d4f; }
+      .angular .framework-icon { background: #dd0031; color: #ffffff; }
+      .vue .framework-icon { background: #4fc08d; color: #ffffff; }
+      .svelte .framework-icon { background: #ff3e00; color: #ffffff; }
+      .nextjs .framework-icon { background: #ffffff; color: #000000; }
+      .nuxt .framework-icon { background: #00c58e; color: #003d4f; }
+      .astro .framework-icon { background: #FF5D01; color: #ffffff; }
+      .solid .framework-icon { background: #2C4F7C; color: #ffffff; }
+      .alpine .framework-icon { background: #8BC0D0; color: #003d4f; }
+      .lit .framework-icon { background: #324FFF; color: #ffffff; }
+      .qwik .framework-icon { background: #AC7EF4; color: #ffffff; }
+
+      .framework-name {
+        font-size: 2.5rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-shadow: 0 0 15px currentColor;
+      }
+
+      .react .framework-name { color: #61dafb; }
+      .angular .framework-name { color: #dd0031; }
+      .vue .framework-name { color: #4fc08d; }
+      .svelte .framework-name { color: #ff3e00; }
+      .nextjs .framework-name { color: #ffffff; }
+      .nuxt .framework-name { color: #00c58e; }
+      .astro .framework-name { color: #FF5D01; }
+      .solid .framework-name { color: #2C4F7C; }
+      .alpine .framework-name { color: #8BC0D0; }
+      .lit .framework-name { color: #324FFF; }
+      .qwik .framework-name { color: #AC7EF4; }
+
+      .framework-description {
+        color: #cccccc;
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+        line-height: 1.5;
+      }
+
+      .features-section {
+        margin-bottom: 1.5rem;
+      }
+
+      .section-title {
+        font-size: 1.2rem;
+        color: #ffffff;
+        margin-bottom: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: bold;
+      }
+
+      .features-list,
+      .performance-list,
+      .use-cases-list {
+        list-style: none;
+      }
+
+      .features-list li,
+      .performance-list li,
+      .use-cases-list li {
+        padding: 0.3rem 0;
+        color: #b0b0b0;
+        position: relative;
+        padding-left: 1.5rem;
+      }
+
+      .features-list li::before,
+      .performance-list li::before,
+      .use-cases-list li::before {
+        content: '▶';
+        position: absolute;
+        left: 0;
+        color: var(--glow-color);
+        text-shadow: 0 0 5px currentColor;
+      }
+
+      .performance-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+
+      .stat {
+        background: rgba(40, 40, 40, 0.6);
+        padding: 0.8rem;
+        border-radius: 8px;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .stat-label {
+        font-size: 0.9rem;
+        color: #888;
+        text-transform: uppercase;
+      }
+
+      .stat-value {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: var(--glow-color);
+        text-shadow: 0 0 5px currentColor;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.8; }
+      }
+
+      .difficulty-meter {
+        display: flex;
+        align-items: center;
+        margin-top: 1rem;
+      }
+
+      .difficulty-label {
+        margin-right: 1rem;
+        font-size: 0.9rem;
+        color: #888;
+      }
+
+      .difficulty-bar {
+        display: flex;
+        gap: 3px;
+      }
+
+      .difficulty-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .difficulty-dot.active {
+        background: var(--glow-color);
+        box-shadow: 0 0 5px currentColor;
+      }
+
+      @media (max-width: 768px) {
+        .main-title {
+          font-size: 2.5rem;
+          letter-spacing: 4px;
+        }
+
+        .frameworks-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .framework-card {
+          padding: 1.5rem;
+        }
+
+        .performance-stats {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1 class="main-title">CHEAT SHEET</h1>
+        <p class="subtitle">Frameworks Frontend - Guia de Escolha</p>
+        <div class="version-badge">VERSION 2.0 - 11 FRAMEWORKS</div>
+      </div>
+
+      <div class="frameworks-grid">
+        <!-- React -->
+        <div class="framework-card react">
+          <div class="framework-header">
+            <div class="framework-icon">⚛️</div>
+            <div>
+              <h2 class="framework-name">React</h2>
+              <p style="color: #61dafb; font-weight: bold">Flexível & Popular</p>
+            </div>
+          </div>
+
+          <p class="framework-description">
+            Biblioteca JavaScript para criar interfaces de usuário. Componentizada, com virtual DOM e ecossistema gigante.
+          </p>
+
+          <div class="features-section">
+            <h3 class="section-title">Pontos Fortes</h3>
+            <ul class="features-list">
+              <li>Ecossistema massivo (NPM)</li>
+              <li>Flexibilidade total de arquitetura</li>
+              <li>Virtual DOM para performance</li>
+              <li>Comunidade gigante e ativa</li>
+              <li>Hooks para lógica reutilizável</li>
+              <li>JSX familiar para devs</li>
+            </ul>
+          </div>
+
+          <div class="features-section">
+            <h3 class="section-title">Ideal Para</h3>
+            <ul class="use-cases-list">
+              <li>SPAs complexas e dinâmicas</li>
+              <li>Prototipagem rápida</li>
+              <li>Apps com muita interatividade</li>
+              <li>Projetos que precisam de flexibilidade</li>
+              <li>Equipes que conhecem JavaScript</li>
+            </ul>
+          </div>
+
+          <div class="performance-stats">
+            <div class="stat">
+              <div class="stat-label">Performance</div>
+              <div class="stat-value">Boa</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Bundle Size</div>
+              <div class="stat-value">Médio</div>
+            </div>
+          </div>
+
+          <div class="difficulty-meter">
+            <span class="difficulty-label">Curva Aprendizado:</span>
+            <div class="difficulty-bar">
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot"></div>
+              <div class="difficulty-dot"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Angular -->
+        <div class="framework-card angular">
+          <div class="framework-header">
+            <div class="framework-icon">🅰️</div>
+            <div>
+              <h2 class="framework-name">Angular</h2>
+              <p style="color: #dd0031; font-weight: bold">Enterprise & Robusto</p>
+            </div>
+          </div>
+
+          <p class="framework-description">
+            Framework completo da Google com TypeScript nativo. Arquitetura opinionada e ferramentas enterprise.
+          </p>
+
+          <div class="features-section">
+            <h3 class="section-title">Pontos Fortes</h3>
+            <ul class="features-list">
+              <li>TypeScript nativo e obrigatório</li>
+              <li>Arquitetura bem definida (MVC)</li>
+              <li>CLI poderoso para scaffolding</li>
+              <li>Dependency Injection robusto</li>
+              <li>Ferramentas de teste integradas</li>
+              <li>Suporte Google long-term</li>
+            </ul>
+          </div>
+
+          <div class="features-section">
+            <h3 class="section-title">Ideal Para</h3>
+            <ul class="use-cases-list">
+              <li>Aplicações enterprise complexas</li>
+              <li>Equipes grandes com padrões</li>
+              <li>Apps que precisam escalar</li>
+              <li>Projetos de longo prazo</li>
+              <li>Sistemas com muitas regras de negócio</li>
+            </ul>
+          </div>
+
+          <div class="performance-stats">
+            <div class="stat">
+              <div class="stat-label">Performance</div>
+              <div class="stat-value">Excelente</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Bundle Size</div>
+              <div class="stat-value">Grande</div>
+            </div>
+          </div>
+
+          <div class="difficulty-meter">
+            <span class="difficulty-label">Curva Aprendizado:</span>
+            <div class="difficulty-bar">
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vue.js -->
+        <div class="framework-card vue">
+          <div class="framework-header">
+            <div class="framework-icon">💚</div>
+            <div>
+              <h2 class="framework-name">Vue.js</h2>
+              <p style="color: #4fc08d; font-weight: bold">Progressivo & Simples</p>
+            </div>
+          </div>
+
+          <p class="framework-description">
+            Framework progressivo que pode ser adotado incrementalmente. Combina o melhor do React e Angular com simplicidade.
+          </p>
+
+          <div class="features-section">
+            <h3 class="section-title">Pontos Fortes</h3>
+            <ul class="features-list">
+              <li>Curva de aprendizado suave</li>
+              <li>Documentação excepcional</li>
+              <li>Adoção progressiva possível</li>
+              <li>Template syntax familiar (HTML)</li>
+              <li>Bundle size pequeno</li>
+              <li>Performance excelente out-of-box</li>
+            </ul>
+          </div>
+
+          <div class="features-section">
+            <h3 class="section-title">Ideal Para</h3>
+            <ul class="use-cases-list">
+              <li>Migração gradual de projetos legados</li>
+              <li>Equipes pequenas/médias</li>
+              <li>Projetos com timeline apertado</li>
+              <li>Apps que precisam de performance</li>
+              <li>Devs novos em frameworks modernos</li>
+            </ul>
+          </div>
+
+          <div class="performance-stats">
+            <div class="stat">
+              <div class="stat-label">Performance</div>
+              <div class="stat-value">Excelente</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Bundle Size</div>
+              <div class="stat-value">Pequeno</div>
+            </div>
+          </div>
+
+          <div class="difficulty-meter">
+            <span class="difficulty-label">Curva Aprendizado:</span>
+            <div class="difficulty-bar">
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot"></div>
+              <div class="difficulty-dot"></div>
+              <div class="difficulty-dot"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Svelte -->
+        <div class="framework-card svelte">
+          <div class="framework-header">
+            <div class="framework-icon">🧡</div>
+            <div>
+              <h2 class="framework-name">Svelte</h2>
+              <p style="color: #ff3e00; font-weight: bold">Compilado & Rápido</p>
+            </div>
+          </div>
+
+          <p class="framework-description">
+            Compilador que gera JavaScript vanilla otimizado. Zero runtime overhead e bundle sizes extremamente pequenos.
+          </p>
+
+          <div class="features-section">
+            <h3 class="section-title">Pontos Fortes</h3>
+            <ul class="features-list">
+              <li>Bundle size mínimo possível</li>
+              <li>Performance runtime máxima</li>
+              <li>Sintaxe simples e intuitiva</li>
+              <li>Compilação inteligente</li>
+              <li>Menos boilerplate que React</li>
+              <li>Animações nativas excelentes</li>
+            </ul>
+          </div>
+
+          <div class="features-section">
+            <h3 class="section-title">Ideal Para</h3>
+            <ul class="use-cases-list">
+              <li>Apps com foco em performance</li>
+              <li>Sites que precisam carregar rápido</li>
+              <li>Projetos inovadores/experimentais</li>
+              <li>Apps com muitas animações</li>
+              <li>PWAs com constraints de tamanho</li>
+            </ul>
+          </div>
+
+          <div class="performance-stats">
+            <div class="stat">
+              <div class="stat-label">Performance</div>
+              <div class="stat-value">Máxima</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Bundle Size</div>
+              <div class="stat-value">Mínimo</div>
+            </div>
+          </div>
+
+          <div class="difficulty-meter">
+            <span class="difficulty-label">Curva Aprendizado:</span>
+            <div class="difficulty-bar">
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot"></div>
+              <div class="difficulty-dot"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Next.js -->
+        <div class="framework-card nextjs">
+          <div class="framework-header">
+            <div class="framework-icon">▲</div>
+            <div>
+              <h2 class="framework-name">Next.js</h2>
+              <p style="color: #ffffff; font-weight: bold">Full-Stack & SEO</p>
+            </div>
+          </div>
+
+          <p class="framework-description">
+            Meta-framework React com SSR/SSG out-of-the-box. Ideal para sites que precisam de SEO e performance.
+          </p>
+
+          <div class="features-section">
+            <h3 class="section-title">Pontos Fortes</h3>
+            <ul class="features-list">
+              <li>SSR/SSG automático e inteligente</li>
+              <li>Otimizações automáticas (images, fonts)</li>
+              <li>API Routes para backend simples</li>
+              <li>Zero-config na maioria dos casos</li>
+              <li>Deploy simplificado (Vercel)</li>
+              <li>Core Web Vitals otimizados</li>
+            </ul>
+          </div>
+
+          <div class="features-section">
+            <h3 class="section-title">Ideal Para</h3>
+            <ul class="use-cases-list">
+              <li>Sites que precisam de SEO</li>
+              <li>E-commerce e landing pages</li>
+              <li>Blogs e sites de conteúdo</li>
+              <li>Apps full-stack simples</li>
+              <li>MVPs que precisam de velocidade</li>
+            </ul>
+          </div>
+
+          <div class="performance-stats">
+            <div class="stat">
+              <div class="stat-label">Performance</div>
+              <div class="stat-value">Excelente</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">SEO</div>
+              <div class="stat-value">Nativo</div>
+            </div>
+          </div>
+
+          <div class="difficulty-meter">
+            <span class="difficulty-label">Curva Aprendizado:</span>
+            <div class="difficulty-bar">
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot"></div>
+              <div class="difficulty-dot"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nuxt.js -->
+        <div class="framework-card nuxt">
+          <div class="framework-header">
+            <div class="framework-icon">💚</div>
+            <div>
+              <h2 class="framework-name">Nuxt.js</h2>
+              <p style="color: #00c58e; font-weight: bold">Vue Meta-Framework</p>
+            </div>
+          </div>
+
+          <p class="framework-description">
+            Meta-framework Vue.js com SSR/SSG e convenções inteligentes. O "Next.js do ecossistema Vue".
+          </p>
+
+          <div class="features-section">
+            <h3 class="section-title">Pontos Fortes</h3>
+            <ul class="features-list">
+              <li>SSR/SSG com Vue.js</li>
+              <li>Auto-routing baseado em arquivos</li>
+              <li>Modules ecosystem rico</li>
+              <li>Performance excelente</li>
+              <li>Developer experience superior</li>
+              <li>TypeScript first-class support</li>
+            </ul>
+          </div>
+
+          <div class="features-section">
+            <h3 class="section-title">Ideal Para</h3>
+            <ul class="use-cases-list">
+              <li>Sites Vue.js que precisam de SEO</li>
+              <li>JAMstack applications</li>
+              <li>Sites estáticos complexos</li>
+              <li>Progressive Web Apps</li>
+              <li>E-commerce com Vue ecosystem</li>
+            </ul>
+          </div>
+
+          <div class="performance-stats">
+            <div class="stat">
+              <div class="stat-label">Performance</div>
+              <div class="stat-value">Excelente</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">DX</div>
+              <div class="stat-value">Superior</div>
+            </div>
+          </div>
+
+          <div class="difficulty-meter">
+            <span class="difficulty-label">Curva Aprendizado:</span>
+            <div class="difficulty-bar">
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot"></div>
+              <div class="difficulty-dot"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Astro -->
+        <div class="framework-card astro">
+          <div class="framework-header">
+            <div class="framework-icon">🚀</div>
+            <div>
+              <h2 class="framework-name">Astro</h2>
+              <p style="color: #FF5D01; font-weight: bold">Content-First & MPA</p>
+            </div>
+          </div>
+
+          <p class="framework-description">
+            Framework content-first que envia zero JavaScript por padrão. Perfeito para sites estáticos com ilhas de interatividade.
+          </p>
+
+          <div class="features-section">
+            <h3 class="section-title">Pontos Fortes</h3>
+            <ul class="features-list">
+              <li>Zero JavaScript por padrão</li>
+              <li>Island Architecture (hidratação parcial)</li>
+              <li>Suporta React, Vue, Svelte juntos</li>
+              <li>Performance imbatível em sites</li>
+              <li>MDX e Markdown nativos</li>
+              <li>Build times extremamente rápidos</li>
+            </ul>
+          </div>
+
+          <div class="features-section">
+            <h3 class="section-title">Ideal Para</h3>
+            <ul class="use-cases-list">
+              <li>Blogs e sites de conteúdo</li>
+              <li>Documentações técnicas</li>
+              <li>Marketing sites e landing pages</li>
+              <li>Sites que priorizam SEO</li>
+              <li>Projetos content-heavy</li>
+            </ul>
+          </div>
+
+          <div class="performance-stats">
+            <div class="stat">
+              <div class="stat-label">Performance</div>
+              <div class="stat-value">Máxima</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">JS Bundle</div>
+              <div class="stat-value">~0KB</div>
+            </div>
+          </div>
+
+          <div class="difficulty-meter">
+            <span class="difficulty-label">Curva Aprendizado:</span>
+            <div class="difficulty-bar">
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot"></div>
+              <div class="difficulty-dot"></div>
+              <div class="difficulty-dot"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SolidJS -->
+        <div class="framework-card solid">
+          <div class="framework-header">
+            <div class="framework-icon">💎</div>
+            <div>
+              <h2 class="framework-name">SolidJS</h2>
+              <p style="color: #2C4F7C; font-weight: bold">Reativo & Performático</p>
+            </div>
+          </div>
+
+          <p class="framework-description">
+            Framework reativo com JSX que compila para JavaScript vanilla otimizado. Performance superior ao React sem Virtual DOM.
+          </p>
+
+          <div class="features-section">
+            <h3 class="section-title">Pontos Fortes</h3>
+            <ul class="features-list">
+              <li>Performance excepcional (benchmarks)</li>
+              <li>Sintaxe JSX familiar (React-like)</li>
+              <li>True reactivity sem Virtual DOM</li>
+              <li>Bundle size mínimo</li>
+              <li>Fine-grained reactivity</li>
+              <li>TypeScript first-class</li>
+            </ul>
+          </div>
+
+          <div class="features-section">
+            <h3 class="section-title">Ideal Para</h3>
+            <ul class="use-cases-list">
+              <li>Apps que exigem máxima performance</li>
+              <li>Migração de projetos React</li>
+              <li>Dashboards real-time complexos</li>
+              <li>Apps com muita reatividade</li>
+              <li>Projetos que precisam de velocidade</li>
+            </ul>
+          </div>
+
+          <div class="performance-stats">
+            <div class="stat">
+              <div class="stat-label">Performance</div>
+              <div class="stat-value">Máxima</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Bundle Size</div>
+              <div class="stat-value">Mínimo</div>
+            </div>
+          </div>
+
+          <div class="difficulty-meter">
+            <span class="difficulty-label">Curva Aprendizado:</span>
+            <div class="difficulty-bar">
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot"></div>
+              <div class="difficulty-dot"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alpine.js -->
+        <div class="framework-card alpine">
+          <div class="framework-header">
+            <div class="framework-icon">⛰️</div>
+            <div>
+              <h2 class="framework-name">Alpine.js</h2>
+              <p style="color: #8BC0D0; font-weight: bold">Minimalista & Progressivo</p>
+            </div>
+          </div>
+
+          <p class="framework-description">
+            Framework JavaScript leve para adicionar comportamento ao HTML. Pensado como "Tailwind para JavaScript".
+          </p>
+
+          <div class="features-section">
+            <h3 class="section-title">Pontos Fortes</h3>
+            <ul class="features-list">
+              <li>Extremamente leve (~15KB)</li>
+              <li>Sintaxe declarativa no HTML</li>
+              <li>Zero build step necessário</li>
+              <li>Curva de aprendizado mínima</li>
+              <li>Perfeito para enhancement progressivo</li>
+              <li>Integra com qualquer backend</li>
+            </ul>
+          </div>
+
+          <div class="features-section">
+            <h3 class="section-title">Ideal Para</h3>
+            <ul class="use-cases-list">
+              <li>Sites server-rendered (Rails, Laravel)</li>
+              <li>Adicionar interatividade sem SPA</li>
+              <li>Protótipos e MVPs simples</li>
+              <li>Projetos que não precisam de build</li>
+              <li>Enhancement de HTML existente</li>
+            </ul>
+          </div>
+
+          <div class="performance-stats">
+            <div class="stat">
+              <div class="stat-label">Bundle Size</div>
+              <div class="stat-value">~15KB</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Build Step</div>
+              <div class="stat-value">Zero</div>
+            </div>
+          </div>
+
+          <div class="difficulty-meter">
+            <span class="difficulty-label">Curva Aprendizado:</span>
+            <div class="difficulty-bar">
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot"></div>
+              <div class="difficulty-dot"></div>
+              <div class="difficulty-dot"></div>
+              <div class="difficulty-dot"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lit -->
+        <div class="framework-card lit">
+          <div class="framework-header">
+            <div class="framework-icon">🔥</div>
+            <div>
+              <h2 class="framework-name">Lit</h2>
+              <p style="color: #324FFF; font-weight: bold">Web Components Nativos</p>
+            </div>
+          </div>
+
+          <p class="framework-description">
+            Biblioteca para criar Web Components rápidos e leves usando padrões modernos da web. Framework-agnostic por natureza.
+          </p>
+
+          <div class="features-section">
+            <h3 class="section-title">Pontos Fortes</h3>
+            <ul class="features-list">
+              <li>Web Components nativos do browser</li>
+              <li>Funciona com qualquer framework</li>
+              <li>Bundle size minúsculo (~5KB)</li>
+              <li>Shadow DOM para encapsulamento</li>
+              <li>Performance excelente</li>
+              <li>Standards-based (futureproof)</li>
+            </ul>
+          </div>
+
+          <div class="features-section">
+            <h3 class="section-title">Ideal Para</h3>
+            <ul class="use-cases-list">
+              <li>Design systems e component libraries</li>
+              <li>Componentes compartilhados cross-framework</li>
+              <li>Micro frontends</li>
+              <li>Apps que precisam interoperar</li>
+              <li>Projetos de longo prazo com standards</li>
+            </ul>
+          </div>
+
+          <div class="performance-stats">
+            <div class="stat">
+              <div class="stat-label">Bundle Size</div>
+              <div class="stat-value">~5KB</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Standards</div>
+              <div class="stat-value">W3C</div>
+            </div>
+          </div>
+
+          <div class="difficulty-meter">
+            <span class="difficulty-label">Curva Aprendizado:</span>
+            <div class="difficulty-bar">
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot"></div>
+              <div class="difficulty-dot"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Qwik -->
+        <div class="framework-card qwik">
+          <div class="framework-header">
+            <div class="framework-icon">⚡</div>
+            <div>
+              <h2 class="framework-name">Qwik</h2>
+              <p style="color: #AC7EF4; font-weight: bold">Resumability & Zero Hydration</p>
+            </div>
+          </div>
+
+          <p class="framework-description">
+            Framework revolucionário com resumability: não faz hydration, continua execução no cliente de onde o servidor parou.
+          </p>
+
+          <div class="features-section">
+            <h3 class="section-title">Pontos Fortes</h3>
+            <ul class="features-list">
+              <li>Zero hydration (resumability)</li>
+              <li>Lazy loading automático extremo</li>
+              <li>Time to Interactive instantâneo</li>
+              <li>Performance constante (não degrada)</li>
+              <li>JSX familiar</li>
+              <li>Fine-grained code splitting</li>
+            </ul>
+          </div>
+
+          <div class="features-section">
+            <h3 class="section-title">Ideal Para</h3>
+            <ul class="use-cases-list">
+              <li>E-commerce com muitos componentes</li>
+              <li>Apps que priorizam Time to Interactive</li>
+              <li>Sites com JavaScript pesado</li>
+              <li>Aplicações mobile-first</li>
+              <li>Projetos experimentais de ponta</li>
+            </ul>
+          </div>
+
+          <div class="performance-stats">
+            <div class="stat">
+              <div class="stat-label">TTI</div>
+              <div class="stat-value">Instantâneo</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Hydration</div>
+              <div class="stat-value">Zero</div>
+            </div>
+          </div>
+
+          <div class="difficulty-meter">
+            <span class="difficulty-label">Curva Aprendizado:</span>
+            <div class="difficulty-bar">
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot active"></div>
+              <div class="difficulty-dot"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
